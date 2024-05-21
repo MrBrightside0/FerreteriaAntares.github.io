@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Iniciar Sesión</title>
+  <title>Administración</title>
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
@@ -27,30 +27,32 @@
     </div>
   </div>
 
-  <div class="login_section layout_padding">
+  <div class="admin_section layout_padding">
     <div class="container">
-      <div class="row">
-        <div class="col-md-6 offset-md-3">
-          <div class="login_box">
-            <h1 class="login_taital" style="margin-top: 80px;">Iniciar Sesión</h1>
-            <form id="loginForm">
-              <div class="form-group">
-                <label for="email">Correo Electrónico:</label>
-                <input type="email" class="form-control" id="email" placeholder="Ingresa tu correo electrónico"
-                  required>
-              </div>
-              <div class="form-group">
-                <label for="password">Contraseña:</label>
-                <input type="password" class="form-control" id="password" placeholder="Ingresa tu contraseña" required>
-              </div>
-              <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
-              <div class="text-center">
-                <a href="index.html" class="btn btn-secondary mt-3" style="margin-bottom: 80px;">Regresar</a>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
+      <h1 class="admin_taital" style="margin-top: 80px;">Administración de Inventario</h1>
+      <button class="btn btn-secondary mb-4" onclick="window.location.href='login.html'">Cerrar Sesión</button>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="inventoryTable">
+          <tr>
+            <td>Llave ajustable</td>
+            <td>Herramienta para ajustar tuercas y tornillos.</td>
+            <td>$50</td>
+            <td>100</td>
+            <td><button class="btn btn-warning">Editar</button> <button class="btn btn-danger">Eliminar</button></td>
+          </tr>
+          <!-- Más filas de productos aquí -->
+        </tbody>
+      </table>
+      <button class="btn btn-primary" onclick="addProduct()">Agregar Producto</button>
     </div>
   </div>
 
@@ -96,21 +98,17 @@
   <script src="js/owl.carousel.js"></script>
   <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
   <script>
-    document.getElementById('loginForm').addEventListener('submit', function (event) {
-      event.preventDefault();
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-
-      // Credenciales predeterminadas
-      const defaultEmail = 'admin@antares.com';
-      const defaultPassword = 'admin123';
-
-      if (email === defaultEmail && password === defaultPassword) {
-        window.location.href = 'admin.html'; // Redirige a la página de administración
-      } else {
-        alert('Credenciales incorrectas. Por favor, intenta de nuevo.');
-      }
-    });
+    function addProduct() {
+      const table = document.getElementById('inventoryTable');
+      const newRow = table.insertRow();
+      newRow.innerHTML = `
+        <td><input type="text" placeholder="Nombre del producto" class="form-control"></td>
+        <td><input type="text" placeholder="Descripción" class="form-control"></td>
+        <td><input type="number" placeholder="Precio" class="form-control"></td>
+        <td><input type="number" placeholder="Cantidad" class="form-control"></td>
+        <td><button class="btn btn-success">Guardar</button> <button class="btn btn-danger">Eliminar</button></td>
+      `;
+    }
   </script>
 </body>
 
